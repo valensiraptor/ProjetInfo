@@ -1,4 +1,4 @@
 # ProjetInfo
 Essai d'endroit pour partager les classes
 
-ET ON COMMIT MAGGLE.
+Et c'est la modification du chaos!
