@@ -1,0 +1,96 @@
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class modeNormal extends JFrame implements KeyListener, ActionListener  {
+    
+    BufferedImage piano;
+    BufferedImage ArrierePlan;
+    Graphics buffer;
+    JButton tamer;
+    Dimension dim;
+    Image touche_1;
+    Image touche_2;
+    Boolean touche1 = false;
+    Boolean touche2 = false;
+    
+    public modeNormal (int w,int h){
+        try {
+            piano = ImageIO.read(new File("arriereplan.jpg"));
+        } catch (IOException e) {
+        }
+        
+        
+        try {
+             touche_1 = ImageIO.read(new File("toucheGauche.jpg"));
+        } catch (IOException e) {}
+        try {
+             touche_2 = ImageIO.read(new File("toucheCentre.jpg"));
+        } catch (IOException e) {}
+        
+        this.setSize(piano.getWidth(), piano.getHeight()+100);
+        dim = getSize();
+        ArrierePlan = new BufferedImage(dim.width, dim.height+100, BufferedImage.TYPE_INT_RGB);
+        buffer = ArrierePlan.getGraphics();
+        this.setTitle("essai");
+        addKeyListener(this);
+        
+
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+    } 
+    
+    public void paint(Graphics g) {
+    buffer.drawImage( piano, 0, 0, this);
+    if(touche1 == true){
+        buffer.drawImage( touche_1, 5, 0, this);
+    }
+    if(touche2 == true){
+        buffer.drawImage( touche_2, 65, 0, this);
+    }
+    repaint();
+    g.drawImage(ArrierePlan,0,100,this);
+
+        }
+    
+    
+    public static void main(String[] args) {
+        modeNormal tamer = new modeNormal(42, 42);
+    }
+
+    public void keyTyped(KeyEvent a) {
+    }
+
+    public void keyPressed(KeyEvent a) {
+        if(a.getKeyChar()=='&'){
+            touche1 = true;
+            
+        }
+        if(a.getKeyChar()=='é'){
+            touche2 = true;
+        }
+    }
+
+    public void keyReleased(KeyEvent a) {
+        if(a.getKeyChar()=='&'){
+            touche1 = false;
+        }
+        if(a.getKeyChar()=='é'){
+            touche2 = false;
+        }
+    }
+
+    public void actionPerformed(ActionEvent a) {
+    }
+}
