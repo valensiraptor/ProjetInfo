@@ -1,0 +1,194 @@
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*; 
+import javax.swing.*;
+import javax.swing.event.*;
+import java.io.* ;
+import java.awt.image.*;
+import java.util.Timer ;
+
+public class fenetreAccueil extends JFrame implements ActionListener{ //fenetreAcceuil h�rite de JFrame, du coup C'EST un JFrame, donc une fenetre
+	
+	private JPanel cadreGauche ; // toutes les variables qui vont bien
+	private JPanel cadreDroit ;  // les JPanel c'est des cadres qui vont contenir les autres composants
+	private JPanel choixMode ;   //On met les JPanel dans la JFrame
+	private JPanel choixMusique ;
+	private JPanel cadrePrincipal ;
+	private int longueur ;
+	private int largeur ;
+	private JLabel bienvenue ; //Juste un truc qui met du texte, � placer dans un JPanel
+	private JLabel instructions ;
+	private JButton demarrer ; //un bouton normal, � placer dans un JPanel
+	
+	Image Raptor ;
+	
+	private ButtonGroup mode ; //un truc qui va cr�er un groupe de boutons � cocher, pour les lier entre eux
+	private JRadioButton tuto ; //si un JRadioButton est cocher, les autres du groupe pourront pas l'�tre
+	private JRadioButton arcade ; //#pratique
+	private JRadioButton yolo ;
+	
+	private ButtonGroup instru ;
+	private JRadioButton piano ;
+	private JRadioButton guitare ;
+	private JRadioButton voixhomme ;
+	private JRadioButton voixfemme ;
+	
+	private JComboBox musique ; //Une liste qui se d�roule
+	private String[] musiqueListe ; //la liste de nom qui va se mettre dans la fenetre d�roulante
+	/*private JRadioButton wiggle ;
+	private JRadioButton getlucky ;
+	private JRadioButton omfg ;
+	private JRadioButton oke ;*/
+	
+	public fenetreAccueil () {
+		
+		boolean a = true;
+
+		this.setTitle("Accueil maggle") ; //le titre de la fen�tre
+		this.setResizable(true) ; //le fait qu'on puisse l'agrandir, ou pas
+		
+		choixMode = new JPanel() ; //initialisation du tout
+		choixMusique = new JPanel() ;
+		cadreDroit = new JPanel() ;
+		cadreGauche = new JPanel() ;
+		cadrePrincipal = new JPanel() ;
+				
+		bienvenue = new JLabel("Bienvenue dans Piano Hero, le tuto ludique", JLabel.CENTER) ;	
+		instructions = new JLabel("Choisissez un instrument, une musique � apprendre, et c'est parti !", JLabel.CENTER) ;
+		demarrer = new JButton("D�marrer l'application") ;
+		
+		//Raptor = createImageIcon("Jax 2.0.JPEG") ;
+		Toolkit T=Toolkit.getDefaultToolkit(); //pareil osef
+		Raptor = T.getImage("Jax 2.0.JPEG") ;
+		//demarrer.(Raptor) ;
+		
+		String[] musiqueListe = {"Wiggle", "Get Lucky", "I Love You", "Pourvu qu'elle vienne"} ;
+		musique = new JComboBox(musiqueListe) ;
+		
+		instru = new ButtonGroup() ;
+		piano = new JRadioButton("Piano") ;
+		piano.setActionCommand("piano") ;
+		guitare = new JRadioButton("Guitare") ;
+		guitare.setActionCommand("guitare") ;
+		voixhomme = new JRadioButton("Voix masculine") ;
+		voixfemme = new JRadioButton("Voix f�minine") ;
+		instru.add(piano) ; //ajouter  la touche piano  au groupe instru
+		instru.add(guitare) ;
+		instru.add(voixhomme) ;
+		instru.add(voixfemme) ;
+		
+		mode = new ButtonGroup() ;
+		tuto = new JRadioButton("Tuto") ;
+		tuto.setActionCommand("tuto");
+		tuto.setSelected(true) ;
+		arcade = new JRadioButton("Arcade") ;
+		arcade.setActionCommand("arcade") ;
+		yolo = new JRadioButton("Libre") ;
+		yolo.setActionCommand("yolo") ;
+		mode.add(tuto) ;
+		mode.add(yolo) ;
+		mode.add(arcade) ;
+
+		/*musique = new ButtonGroup() ;
+		wiggle = new JRadioButton("Wiggle - Derulo") ;
+		wiggle.setEnabled(false) ;
+		getlucky = new JRadioButton("Get Lucky - Daft Punk") ;
+		getlucky.setEnabled(false) ;
+		omfg = new JRadioButton("I Love You - OMFG") ;
+		omfg.setEnabled(false) ;
+		oke = new JRadioButton("Pourvu qu'elle vienne - B2OBA") ;
+		oke.setEnabled(false) ;
+		musique.add(wiggle) ;
+		musique.add(getlucky) ;
+		musique.add(omfg) ;
+		musique.add(oke) ;*/
+		
+		cadreGauche.setLayout(new GridLayout(2,2)) ; //mettre un Layout, c'est dire quel forme aura ton cadre
+		cadreGauche.setBackground(Color.white) ;
+		cadreGauche.add(piano) ; //ajouter un composant au JPanel, donc au cadre
+		cadreGauche.add(voixfemme) ;
+		cadreGauche.add(voixhomme) ;
+		cadreGauche.add(guitare) ;
+		
+		/*choixMusique.setLayout(new GridLayout(2,2)) ;
+		choixMusique.setBackground(Color.white) ;
+		choixMusique.add(wiggle) ;
+		choixMusique.add(getlucky) ;
+		choixMusique.add(omfg) ;
+		choixMusique.add(oke) ;*/
+		
+		choixMode.setLayout(new FlowLayout()) ;
+		choixMode.setBackground(Color.white) ;
+		choixMode.add(arcade) ;
+		choixMode.add(tuto) ;
+		choixMode.add(yolo) ;
+		
+		cadreDroit.setLayout(new GridLayout(2,1)) ;
+		cadreDroit.setBackground(Color.white) ;
+		cadreDroit.add(choixMode) ; //mettre un cadre dans un cadre, cadreception
+		cadreDroit.add(musique) ; //�a offre pas mal de possibilit�s
+		
+		cadrePrincipal.setLayout(new BorderLayout()) ;
+		cadrePrincipal.setBackground(Color.white) ;
+		cadrePrincipal.add("North", bienvenue) ; //foutre � un endroit les bouton dans 
+		cadrePrincipal.add("West", cadreGauche) ; //le BorderLayout, un JPanel un peu bizarre mais styl�
+		cadrePrincipal.add("Center", demarrer) ;
+		cadrePrincipal.add("East", cadreDroit) ;
+		cadrePrincipal.add("South", instructions) ;
+		
+		musique.addActionListener(this) ; //les boutons renvoient un ''message'' si on appuie dessus
+	    tuto.addActionListener(this);
+	    arcade.addActionListener(this);
+	    piano.addActionListener(this);
+	    guitare.addActionListener(this);
+	    voixhomme.addActionListener(this);
+	    voixfemme.addActionListener(this);
+	   /* wiggle.addActionListener(this);
+	    getlucky.addActionListener(this);
+	    oke.addActionListener(this);
+	    omfg.addActionListener(this);*/
+	   
+		demarrer.setEnabled(false) ;
+		
+		this.setContentPane(cadrePrincipal) ; //�a rend visible le cadre
+		this.pack() ;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ; //sans r�fl�chir, on le met :p c'est pour rendre fermable le truc je crois
+		this.setVisible(true) ;		
+		
+		
+	}
+	
+	/*protected static ImageIcon createImageIcon(String path) {
+	    java.net.URL imgURL = JButton.class.getResource(path);
+	    return new ImageIcon(imgURL);
+	}*/
+	
+	public void actionPerformed(ActionEvent e) { // dire ce que les messages des boutons vont faire
+	    if (yolo.isSelected() == true) {
+	        musique.setEnabled(false);
+	    } 
+	    
+	    if (tuto.isSelected() == true | arcade.isSelected() == true){
+	    	musique.setEnabled(true);
+	    }
+	    if ((piano.isSelected() == true | voixhomme.isSelected() == true | voixfemme.isSelected() == true | guitare.isSelected() == true)
+	    		&& (tuto.isSelected() == true | yolo.isSelected() == true | arcade.isSelected() == true)){
+	         demarrer.setEnabled(true) ;
+	      }
+	   
+	      
+	      /*if (demarrer.isSelected() == true && piano.isSelected() == true && wiggle.isSelected() == true){
+	      	piano_wiggle.main(String[] args) ;
+	      }
+	    */
+	}
+	
+	public static void main (String[] args){
+		fenetreAccueil wesh = new fenetreAccueil() ;
+		//note DVNO = new note("boum", "b�b�") ;
+		//wesh.setSize(1000, 400) ;
+	}
+	
+}
+	 
+
