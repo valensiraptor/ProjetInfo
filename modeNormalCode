@@ -1,3 +1,4 @@
+package client;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -132,55 +133,55 @@ public class modeNormal extends JFrame implements KeyListener, ActionListener  {
     public void paint(Graphics g) {
     buffer.drawImage( piano, 0, 0, this);
     if(touche1 == true){
-        buffer.drawImage( touche_1, 5, 0, this);
+        buffer.drawImage( touche_1, 11, 539, this);
     }
     if(touche2 == true){
-        buffer.drawImage( touche_2, 70, 0, this);
+        buffer.drawImage( touche_2, 90, 540, this);
     }
     if(touche3 == true){
-        buffer.drawImage( touche_3, 150, 0, this);
+        buffer.drawImage( touche_3, 169, 539, this);
     }
     if(touche4 == true){
-        buffer.drawImage( touche_4, 235, 0, this);
+        buffer.drawImage( touche_4, 247, 539, this);
      }
     if(touche5 == true){
-        buffer.drawImage( touche_5, 305, 0, this);
+        buffer.drawImage( touche_5, 305, 539, this);
     }
     if(touche6 == true){
-        buffer.drawImage( touche_6, 380, 0, this);
+        buffer.drawImage( touche_6, 380,539, this);
     }
     if(touche7 == true){
-        buffer.drawImage( touche_7, 465, 0, this);
+        buffer.drawImage( touche_7, 481, 539, this);
     }    
     if(touche8 == true){
-        buffer.drawImage( touche_8, 550, 0, this);
+        buffer.drawImage( touche_8, 559, 539, this);
      }
     if(touche9 == true){
-        buffer.drawImage( touche_9, 615, 0, this);
+        buffer.drawImage( touche_9, 615, 539, this);
       }
     if(touche10 == true){
-        buffer.drawImage( touche_10, 690, 0, this);
+        buffer.drawImage( touche_10, 715, 539, this);
      }
     if(touche11 == true){
-        buffer.drawImage( touche_11, 55, 0, this);
+        buffer.drawImage( touche_11, 75, 540, this);
      }   
     if(touche12 == true){
-        buffer.drawImage( touche_12, 135, 0, this);
+        buffer.drawImage( touche_12, 155, 540, this);
              }
     if(touche13 == true){
-        buffer.drawImage( touche_13, 290, 0, this);
+        buffer.drawImage( touche_13, 310, 540, this);
              }
     if(touche14 == true){
-        buffer.drawImage( touche_14, 370, 0, this);
+        buffer.drawImage( touche_14, 390, 540, this);
              }
     if(touche15 == true){
-        buffer.drawImage( touche_15, 450, 0, this);
+        buffer.drawImage( touche_15, 469, 540, this);
              }
     if(touche16 == true){
-        buffer.drawImage( touche_16, 605, 0, this);
+        buffer.drawImage( touche_16, 625, 540, this);
              }
     if(touche17 == true){
-        buffer.drawImage( touche_17, 685, 0, this);
+        buffer.drawImage( touche_17, 701, 540, this);
              }
     repaint();
     //paint(this.getGraphics());
