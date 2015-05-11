@@ -21,6 +21,7 @@ public class modeNormal extends JFrame implements KeyListener, ActionListener  {
     Graphics buffer;
     JButton tamer;
     Dimension dim;
+    Image touche_1;
     Image touche_2;
     Image touche_3;
     Image touche_4;
